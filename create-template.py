@@ -18,7 +18,9 @@ monitoringState = ec2Dict['Monitoring']['State']
 ebsOptimized = ec2Dict['EbsOptimized']
 vpcId = ec2Dict['VpcId']
 keyName = ec2Dict['KeyName']
+securityGroups = ec2Dict['SecurityGroups']
 print monitoringState
 print ebsOptimized
 print vpcId
 print keyName
+print securityGroups
