@@ -23,12 +23,42 @@ subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
 tags = ec2Dict['Tags']
-print monitoringState
-print ebsOptimized
-print vpcId
-print keyName
-print securityGroups
-print subnetId
-print instanceType
-print instanceProfile
-print tags
+
+response = ec2Client.create_launch_template(
+    LaunchTemplateName='test-template',
+    LaunchTemplateData={
+        'EbsOptimized': ebsOptimized,
+        'IamInstanceProfile': {
+            'Arn': instanceProfile,
+        },
+        'InstanceType': instanceType,
+        'KeyName': keyName,
+        'Monitoring': {
+            'Enabled': monitoringState,
+        },
+        'InstanceInitiatedShutdownBehavior': 'stop',
+        'TagSpecifications': [
+            {
+                'ResourceType': 'volume',
+                'Tags': [
+                    {
+                        'Key': 'Name',
+                        'Value': 'motes'
+                    },
+                ]
+            },
+            {
+                'ResourceType': 'instance',
+                'Tags': [
+                    {
+                        'Key': 'Name',
+                        'Value': 'Motes'
+                    },
+                ]
+            }
+        ],
+        'SecurityGroupIds': [
+            'sg-1c499461',
+        ]
+    }
+)
