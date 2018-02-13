@@ -22,6 +22,7 @@ securityGroups = ec2Dict['SecurityGroups']
 subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
+tags = ec2Dict['Tags']
 print monitoringState
 print ebsOptimized
 print vpcId
@@ -30,3 +31,4 @@ print securityGroups
 print subnetId
 print instanceType
 print instanceProfile
+print tags
