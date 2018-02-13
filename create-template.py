@@ -13,4 +13,4 @@ ec2Dict = ec2Client.describe_instances(
         instanceId
     ],
 )
-print ec2Dict['Reservations']['0']
+print ec2Dict['Reservations'][0]['Instances'][0]
