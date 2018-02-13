@@ -19,8 +19,10 @@ ebsOptimized = ec2Dict['EbsOptimized']
 vpcId = ec2Dict['VpcId']
 keyName = ec2Dict['KeyName']
 securityGroups = ec2Dict['SecurityGroups']
+subnetId = ec2Dict['SubnetId']
 print monitoringState
 print ebsOptimized
 print vpcId
 print keyName
 print securityGroups
+print subnetId
