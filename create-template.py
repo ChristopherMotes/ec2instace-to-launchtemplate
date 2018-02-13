@@ -25,6 +25,7 @@ subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
 tags = ec2Dict['Tags']
+print tags
 
 response = ec2Client.create_launch_template(
     LaunchTemplateName='testtemplate',
@@ -47,7 +48,6 @@ response = ec2Client.create_launch_template(
                 'SubnetId': subnetId
             },
         ],
-
         'TagSpecifications': [
             {
                 'ResourceType': 'volume',
@@ -60,12 +60,7 @@ response = ec2Client.create_launch_template(
             },
             {
                 'ResourceType': 'instance',
-                'Tags': [
-                    {
-                        'Key': 'Name',
-                        'Value': 'Motes'
-                    },
-                ]
+                'Tags': tags
             }
         ],
         'SecurityGroupIds': [
