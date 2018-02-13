@@ -21,6 +21,7 @@ keyName = ec2Dict['KeyName']
 securityGroups = ec2Dict['SecurityGroups']
 subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
+instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
 print monitoringState
 print ebsOptimized
 print vpcId
@@ -28,3 +29,4 @@ print keyName
 print securityGroups
 print subnetId
 print instanceType
+print instanceProfile
