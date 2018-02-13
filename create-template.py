@@ -25,9 +25,12 @@ subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
 tags = ec2Dict['Tags']
+for x in tags:
+   if x['Key'] == "Name":
+      NameTag =  x['Value']
 
 response = ec2Client.create_launch_template(
-    LaunchTemplateName='testtemplate',
+    LaunchTemplateName=NameTag,
     LaunchTemplateData={
         'EbsOptimized': ebsOptimized,
         'IamInstanceProfile': {
@@ -40,9 +43,7 @@ response = ec2Client.create_launch_template(
         'InstanceInitiatedShutdownBehavior': 'stop',
         'NetworkInterfaces': [
             {
-                'Groups': [
-                    'sg-1c499461',
-                ],
+                'Groups': securityGroups,
                 'PrivateIpAddress': privateIpAddress,
                 'SubnetId': subnetId
             },
@@ -53,7 +54,7 @@ response = ec2Client.create_launch_template(
                 'Tags': [
                     {
                         'Key': 'Name',
-                        'Value': 'motes'
+                        'Value': NameTag
                     },
                 ]
             },
