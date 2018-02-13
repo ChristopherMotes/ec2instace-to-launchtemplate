@@ -16,4 +16,8 @@ ec2Dict = ec2Client.describe_instances(
 ec2Dict = ec2Dict['Reservations'][0]['Instances'][0]
 print ec2Dict
 monitoringState = ec2Dict['Monitoring']['State']
+ebsOptimized = ec2Dict['EbsOptimized']
+vpcId = ec2Dict['VpcId']
 print monitoringState
+print ebsOptimized
+print vpcId
