@@ -18,6 +18,7 @@ ec2Dict = ec2Dict['Reservations'][0]['Instances'][0]
 monitoringState = ec2Dict['Monitoring']['State']
 ebsOptimized = ec2Dict['EbsOptimized']
 vpcId = ec2Dict['VpcId']
+privateIpAddress = ec2Dict['PrivateIpAddress']
 keyName = ec2Dict['KeyName']
 securityGroups = ec2Dict['SecurityGroups']
 subnetId = ec2Dict['SubnetId']
@@ -37,6 +38,16 @@ response = ec2Client.create_launch_template(
         'Monitoring': {
         },
         'InstanceInitiatedShutdownBehavior': 'stop',
+        'NetworkInterfaces': [
+            {
+                'Groups': [
+                    'sg-1c499461',
+                ],
+                'PrivateIpAddress': privateIpAddress,
+                'SubnetId': subnetId
+            },
+        ],
+
         'TagSpecifications': [
             {
                 'ResourceType': 'volume',
