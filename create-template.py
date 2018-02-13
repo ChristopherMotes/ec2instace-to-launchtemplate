@@ -25,7 +25,6 @@ subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
 tags = ec2Dict['Tags']
-print tags
 
 response = ec2Client.create_launch_template(
     LaunchTemplateName='testtemplate',
