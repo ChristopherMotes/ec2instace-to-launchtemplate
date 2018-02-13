@@ -1,6 +1,7 @@
 #!/usr/bin/python
 import boto3
 import json
+import distutils.util
 import argparse
 
 parser = argparse.ArgumentParser(description='Required Inputs to create template')
@@ -25,7 +26,7 @@ instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
 tags = ec2Dict['Tags']
 
 response = ec2Client.create_launch_template(
-    LaunchTemplateName='test-template',
+    LaunchTemplateName='testtemplate',
     LaunchTemplateData={
         'EbsOptimized': ebsOptimized,
         'IamInstanceProfile': {
@@ -34,7 +35,6 @@ response = ec2Client.create_launch_template(
         'InstanceType': instanceType,
         'KeyName': keyName,
         'Monitoring': {
-            'Enabled': monitoringState,
         },
         'InstanceInitiatedShutdownBehavior': 'stop',
         'TagSpecifications': [
