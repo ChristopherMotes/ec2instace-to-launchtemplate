@@ -25,11 +25,13 @@ keyName = ec2Dict['KeyName']
 subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
-tags = ec2Dict['Tags']
 securityGroups = []
 for sg in ec2Dict['SecurityGroups']:
    securityGroups.append(sg['GroupId'])
-for x in tags:
+tags = []
+for x  in ec2Dict['Tags']:
+   if not x['Key'].startswith('aws:'):
+      tags.append(x)
    if x['Key'] == "Name":
       NameTag =  x['Value']
 
