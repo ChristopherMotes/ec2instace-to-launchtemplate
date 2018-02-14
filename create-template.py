@@ -37,17 +37,18 @@ response = ec2Client.create_launch_template(
     LaunchTemplateName=templateName,
     LaunchTemplateData={
         'EbsOptimized': ebsOptimized,
+        'DisableApiTermination': True,
         'IamInstanceProfile': {
             'Arn': instanceProfile,
         },
         'InstanceType': instanceType,
         'KeyName': keyName,
         'Monitoring': {
+            'Enabled': True
         },
         'InstanceInitiatedShutdownBehavior': 'stop',
         'NetworkInterfaces': [
             {
-                'Groups': securityGroups,
                 'PrivateIpAddress': privateIpAddress,
                 'SubnetId': subnetId
             },
@@ -67,8 +68,6 @@ response = ec2Client.create_launch_template(
                 'Tags': tags
             }
         ],
-        'SecurityGroupIds': [
-            'sg-1c499461',
-        ]
+        'SecurityGroupIds': securityGroups
     }
 )
