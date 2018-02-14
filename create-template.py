@@ -6,8 +6,10 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Required Inputs to create template')
 parser.add_argument('--instance-id', nargs=1, required=True)
+parser.add_argument('--template-name', nargs=1, required=True)
 args = parser.parse_args()
 instanceId = args.instance_id[0]
+templateName = args.template_name[0]
 ec2Client = boto3.client('ec2')
 ec2Dict = ec2Client.describe_instances(
     InstanceIds=[
@@ -32,7 +34,7 @@ for x in tags:
       NameTag =  x['Value']
 
 response = ec2Client.create_launch_template(
-    LaunchTemplateName="templatevalue",
+    LaunchTemplateName=templateName,
     LaunchTemplateData={
         'EbsOptimized': ebsOptimized,
         'IamInstanceProfile': {
