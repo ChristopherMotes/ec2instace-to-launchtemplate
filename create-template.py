@@ -20,17 +20,19 @@ ebsOptimized = ec2Dict['EbsOptimized']
 vpcId = ec2Dict['VpcId']
 privateIpAddress = ec2Dict['PrivateIpAddress']
 keyName = ec2Dict['KeyName']
-securityGroups = ec2Dict['SecurityGroups']
 subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
 tags = ec2Dict['Tags']
+securityGroups = []
+for sg in ec2Dict['SecurityGroups']:
+   securityGroups.append(sg['GroupId'])
 for x in tags:
    if x['Key'] == "Name":
       NameTag =  x['Value']
 
 response = ec2Client.create_launch_template(
-    LaunchTemplateName=NameTag,
+    LaunchTemplateName="templatevalue",
     LaunchTemplateData={
         'EbsOptimized': ebsOptimized,
         'IamInstanceProfile': {
