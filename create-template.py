@@ -25,6 +25,8 @@ keyName = ec2Dict['KeyName']
 subnetId = ec2Dict['SubnetId']
 instanceType = ec2Dict['InstanceType']
 instanceProfile = ec2Dict['IamInstanceProfile']['Arn']
+print "SubnetId is " + subnetId
+print "Primary IP is " + privateIpAddress
 securityGroups = []
 for sg in ec2Dict['SecurityGroups']:
    securityGroups.append(sg['GroupId'])
@@ -49,12 +51,6 @@ response = ec2Client.create_launch_template(
             'Enabled': True
         },
         'InstanceInitiatedShutdownBehavior': 'stop',
-        'NetworkInterfaces': [
-            {
-                'PrivateIpAddress': privateIpAddress,
-                'SubnetId': subnetId
-            },
-        ],
         'TagSpecifications': [
             {
                 'ResourceType': 'volume',
