@@ -48,7 +48,6 @@ response = ec2Client.create_launch_template(
         'InstanceType': instanceType,
         'KeyName': keyName,
         'Monitoring': {
-            'Enabled': True
         },
         'InstanceInitiatedShutdownBehavior': 'stop',
         'TagSpecifications': [
